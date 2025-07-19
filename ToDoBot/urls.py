@@ -19,6 +19,7 @@ from django.urls import path
 from todo.views import health_check
 
 urlpatterns = [
+    path('', health_check, name='home'),  
     path('todo', health_check, name='todo'),
     path('admin/', admin.site.urls),
 ]

@@ -14,11 +14,6 @@ class Task(models.Model):
     description = models.TextField(blank=True)
     scheduled_time = models.DateTimeField(null=True, blank=True)
     is_completed = models.BooleanField(default=False)
-    is_recurring = models.BooleanField(default=False)
-    recurrence_pattern = models.CharField(max_length=255, blank=True)
-    task_type = models.CharField(max_length=100, blank=True)
-    device_type = models.CharField(max_length=100, blank=True)
-    action = models.CharField(max_length=255, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

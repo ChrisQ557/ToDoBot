@@ -1,9 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views import generic
+from .models import Task
 
 # Create your views here
-def health_check(request):
-    return HttpResponse("It works!")
+class TaskList(generic.ListView):
+    queryset = Post.objects.all()
+    template_name = 'task_list.html'
+
     
-    return HttpResponse("It works!")
+   
 

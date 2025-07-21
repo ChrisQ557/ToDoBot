@@ -1,0 +1,172 @@
+[
+  {
+    "model": "todo.task",
+    "pk": 1,
+    "fields": {
+      "user": 8,
+      "category": 12,
+      "title": "Set up smart lights",
+      "description": "Install and configure smart lighting in the living room.",
+      "scheduled_time": null,
+      "is_completed": false,
+      "created_at": "2024-06-01T10:00:00Z",
+      "updated_at": "2024-06-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "todo.task",
+    "pk": 2,
+    "fields": {
+      "user": 8,
+      "category": 11,
+      "title": "Clean the washing machine",
+      "description": "Run a cleaning cycle on the washing machine.",
+      "scheduled_time": null,
+      "is_completed": false,
+      "created_at": "2024-06-01T10:05:00Z",
+      "updated_at": "2024-06-01T10:05:00Z"
+    }
+  },
+  {
+    "model": "todo.task",
+    "pk": 3,
+    "fields": {
+      "user": 8,
+      "category": 6,
+      "title": "Test surround sound system",
+      "description": "Play a movie to test the new surround sound setup.",
+      "scheduled_time": null,
+      "is_completed": false,
+      "created_at": "2024-06-01T10:10:00Z",
+      "updated_at": "2024-06-01T10:10:00Z"
+    }
+  },
+  {
+    "model": "todo.task",
+    "pk": 4,
+    "fields": {
+      "user": 8,
+      "category": 12,
+      "title": "Automate coffee maker",
+      "description": "Set up a schedule for the smart coffee maker.",
+      "scheduled_time": null,
+      "is_completed": false,
+      "created_at": "2024-06-01T10:15:00Z",
+      "updated_at": "2024-06-01T10:15:00Z"
+    }
+  },
+
+  {
+    "model": "todo.task",
+    "pk": 5,
+    "fields": {
+      "user": 7,
+      "category": 11,
+      "title": "Check refrigerator filter",
+      "description": "Replace or clean the refrigerator water filter.",
+      "scheduled_time": null,
+      "is_completed": false,
+      "created_at": "2024-06-01T10:20:00Z",
+      "updated_at": "2024-06-01T10:20:00Z"
+    }
+  },
+  {
+    "model": "todo.task",
+    "pk": 6,
+    "fields": {
+      "user": 7,
+      "category": 6,
+      "title": "Update streaming apps",
+      "description": "Update all apps on the smart TV.",
+      "scheduled_time": null,
+      "is_completed": false,
+      "created_at": "2024-06-01T10:25:00Z",
+      "updated_at": "2024-06-01T10:25:00Z"
+    }
+  },
+  {
+    "model": "todo.task",
+    "pk": 7,
+    "fields": {
+      "user": 7,
+      "category": 12,
+      "title": "Configure thermostat",
+      "description": "Set up a new schedule for the smart thermostat.",
+      "scheduled_time": null,
+      "is_completed": false,
+      "created_at": "2024-06-01T10:30:00Z",
+      "updated_at": "2024-06-01T10:30:00Z"
+    }
+  },
+  {
+    "model": "todo.task",
+    "pk": 8,
+    "fields": {
+      "user": 7,
+      "category": 11,
+      "title": "Test dishwasher cycle",
+      "description": "Run a test cycle on the dishwasher.",
+      "scheduled_time": null,
+      "is_completed": false,
+      "created_at": "2024-06-01T10:35:00Z",
+      "updated_at": "2024-06-01T10:35:00Z"
+    }
+  },
+
+  {
+    "model": "todo.task",
+    "pk": 9,
+    "fields": {
+      "user": 5,
+      "category": 6,
+      "title": "Calibrate projector",
+      "description": "Adjust the projector settings for optimal picture.",
+      "scheduled_time": null,
+      "is_completed": false,
+      "created_at": "2024-06-01T10:40:00Z",
+      "updated_at": "2024-06-01T10:40:00Z"
+    }
+  },
+  {
+    "model": "todo.task",
+    "pk": 10,
+    "fields": {
+      "user": 5,
+      "category": 12,
+      "title": "Install smart lock",
+      "description": "Replace front door lock with a smart lock.",
+      "scheduled_time": null,
+      "is_completed": false,
+      "created_at": "2024-06-01T10:45:00Z",
+      "updated_at": "2024-06-01T10:45:00Z"
+    }
+  },
+  {
+    "model": "todo.task",
+    "pk": 11,
+    "fields": {
+      "user": 5,
+      "category": 11,
+      "title": "Clean oven",
+      "description": "Run the oven's self-cleaning cycle.",
+      "scheduled_time": null,
+      "is_completed": false,
+      "created_at": "2024-06-01T10:50:00Z",
+      "updated_at": "2024-06-01T10:50:00Z"
+    }
+  },
+  {
+    "model": "todo.task",
+    "pk": 12,
+    "fields": {
+      "user": 5,
+      "category": 6,
+      "title": "Test game console",
+      "description": "Connect and test the new game console.",
+      "scheduled_time": null,
+      "is_completed": false,
+      "created_at": "2024-06-01T10:55:00Z",
+      "updated_at": "2024-06-01T10:55:00Z"
+    }
+  }
+]

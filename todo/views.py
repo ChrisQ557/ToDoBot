@@ -4,8 +4,9 @@ from .models import Task
 
 # Create your views here
 class TaskList(generic.ListView):
-    queryset = Task.objects.all()
-    template_name = 'task_list.html'
+    queryset = Task.objects.order_by('user')
+    template_name = 'todo/index.html'
+    paginate_by = 6
 
     
    

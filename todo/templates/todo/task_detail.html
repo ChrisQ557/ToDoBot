@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+.masthead-bg {
+    background-image: url('https://images.unsplash.com/photo-1598791318878-10e76d178023?fm=jpg&q=60&w=1200');
+    background-size: cover;
+    background-position: center;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+.masthead-overlay {
+    background: rgba(0,0,0,0.5);
+    width: 100%;
+    padding: 2rem 0;
+}
+</style>
+
+<div class="masthead-bg">
+  <div class="container masthead-overlay">
+    <div class="row g-0">
+      <div class="col-md-8 masthead-text">
+        <h1 class="post-title">{{ task.title }}</h1>
+        <p class="post-subtitle">{{ task.user }} | {{ task.created_at|date:'M d, Y' }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col card mb-4 mt-3 left top">
+      <div class="card-body">
+        <p class="card-text">
+          {{ task.description|linebreaksbr }}
+        </p>
+        {% if task.scheduled_time %}
+        <p class="text-muted">Scheduled: {{ task.scheduled_time|date:'M d, Y H:i' }}</p>
+        {% endif %}
+        <p>Status: {% if task.is_completed %}<span class="badge bg-success">Completed</span>{% else %}<span class="badge bg-warning text-dark">Pending</span>{% endif %}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

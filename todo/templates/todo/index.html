@@ -23,6 +23,7 @@
                                     <span class="badge bg-warning text-dark">Pending</span>
                                 {% endif %}
                             </p>
+                            <a href="{% url 'task_detail' task.slug %}" class="task-link">View Details</a>
                             <!-- Optionally, add edit/delete buttons here -->
                         </div>
                     </div>

@@ -12,6 +12,7 @@ class Task(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='tasks')
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
     scheduled_time = models.DateTimeField(null=True, blank=True)
     is_completed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

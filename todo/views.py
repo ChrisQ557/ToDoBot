@@ -6,7 +6,7 @@ from .models import Task
 class TaskList(generic.ListView):
     queryset = Task.objects.order_by('user')
     template_name = 'todo/index.html'
-    paginate_by = 6
+    paginate_by = 9
 
     
    

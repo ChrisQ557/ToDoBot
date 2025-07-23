@@ -5,9 +5,9 @@ from django_summernote.admin import SummernoteModelAdmin
 
 @admin.register(Task)
 class TaskAdmin(SummernoteModelAdmin):
-
-    list_display = ('title', 'is_completed', 'created_at')
-    search_fields = ['title']
+    prepopulated_fields = {"slug": ("title",)}
+    list_display = ("title", "user", "category", "is_completed", "slug")
+    search_fields = ("title", "description", "slug")
     summernote_fields = ('description',)
    
 

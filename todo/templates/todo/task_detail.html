@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load crispy_forms_tags %}
 
 <style>
 .masthead-bg {
@@ -46,5 +47,33 @@
     </div>
   </div>
 </div>
+
+{% if user.is_authenticated %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 card mb-4 mt-3">
+      <div class="card-body">
+        <h3>Update Task:</h3>
+        <p>Editing as: {{ user.username }}</p>
+        <form method="post" style="margin-top: 1.3em;">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary btn-lg">Update</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 card mb-4 mt-3">
+      <div class="card-body">
+        <p>Log in to update this task.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 
 {% endblock content %}

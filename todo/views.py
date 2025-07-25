@@ -35,6 +35,33 @@ def task_detail(request, slug):
         },
     )
 
+@login_required
+def create_task(request):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.user = request.user
+            from django.utils.text import slugify
+            task.slug = slugify(task.title)
+            task.save()
+            from django.urls import reverse
+            from django.http import HttpResponseRedirect
+            return HttpResponseRedirect(reverse('task_detail', args=[task.slug]))
+    else:
+        form = TaskForm()
+    return render(request, 'todo/task_form.html', {'form': form})
+
+@login_required
+def delete_task(request, slug):
+    task = get_object_or_404(Task, slug=slug, user=request.user)
+    if request.method == 'POST':
+        task.delete()
+        from django.urls import reverse
+        from django.http import HttpResponseRedirect
+        return HttpResponseRedirect(reverse('home'))
+    return render(request, 'todo/task_confirm_delete.html', {'task': task})
+
     
    
 

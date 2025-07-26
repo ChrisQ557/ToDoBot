@@ -6,12 +6,21 @@ from .models import Task
 from .forms import TaskForm
 
 # Create your views here
+from django.utils import timezone
+
 class TaskList(LoginRequiredMixin, generic.ListView):
     template_name = 'todo/index.html'
     paginate_by = 6
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user).order_by('-created_at')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        now = timezone.localtime()
+        context['today'] = now.date()
+        context['now'] = now
+        return context
 
 @login_required
 def task_detail(request, slug):

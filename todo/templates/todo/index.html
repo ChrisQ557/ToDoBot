@@ -20,10 +20,21 @@
                             <hr />
                             <p class="card-text text-muted h6">Due: {{ task.scheduled_time|date:'M d, Y' }}</p>
                             <p class="card-text">
-                                Status: {% if task.completed %}
-                                    <span class="badge bg-success">Completed</span>
+                                Status:
+                                {% if task.task_type == 'automation' %}
+                                    {% if task.last_completed_date == today %}
+                                        <span class="badge bg-success">Completed for today</span>
+                                    {% else %}
+                                        <span class="badge bg-warning text-dark">Pending for today</span>
+                                    {% endif %}
                                 {% else %}
-                                    <span class="badge bg-warning text-dark">Pending</span>
+                                    {% if task.is_completed %}
+                                        <span class="badge bg-success">Completed</span>
+                                    {% elif task.scheduled_time and task.scheduled_time < now and not task.is_completed %}
+                                        <span class="badge bg-danger">Overdue</span>
+                                    {% else %}
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                    {% endif %}
                                 {% endif %}
                             </p>
                             <a href="{% url 'task_detail' task.slug %}" class="task-link">View Details</a>

@@ -16,7 +16,7 @@ class TaskList(LoginRequiredMixin, generic.ListView):
 @login_required
 def task_detail(request, slug):
     """
-    Display an individual :model:`todo.Task` and its form.
+    Display and update an individual :model:`todo.Task` and its form.
 
     Context
         task
@@ -28,7 +28,15 @@ def task_detail(request, slug):
         todo/task_detail.html
     """
     task = get_object_or_404(Task, slug=slug, user=request.user)
-    form = TaskForm(instance=task)
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            from django.urls import reverse
+            from django.http import HttpResponseRedirect
+            return HttpResponseRedirect(reverse('task_detail', args=[task.slug]))
+    else:
+        form = TaskForm(instance=task)
     return render(
         request,
         "todo/task_detail.html",

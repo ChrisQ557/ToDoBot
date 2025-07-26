@@ -57,9 +57,42 @@
         <p>Editing as: {{ user.username }}</p>
         <form method="post" style="margin-top: 1.3em;">
             {% csrf_token %}
-            {{ form|crispy }}
+            <div id="task-form-fields">
+              {{ form.title.label_tag }} {{ form.title }}<br>
+              {{ form.description.label_tag }} {{ form.description }}<br>
+              {{ form.category.label_tag }} {{ form.category }}<br>
+              {{ form.scheduled_time.label_tag }} {{ form.scheduled_time }}<br>
+              {{ form.is_completed.label_tag }} {{ form.is_completed }}<br>
+              {{ form.task_type.label_tag }} {{ form.task_type }}<br>
+              <div id="recurrence-fields">
+                {{ form.recurrence_time.label_tag }} {{ form.recurrence_time }}<br>
+                {{ form.recurrence_days.label_tag }} {{ form.recurrence_days }}<br>
+              </div>
+            </div>
             <button type="submit" class="btn btn-primary btn-lg">Update</button>
         </form>
+        {% load static %}
+        <script src="{% static 'js/script.js' %}"></script>
+        <script>
+          function toggleRecurrenceFields() {
+            var taskType = document.getElementById('id_task_type');
+            var recurrenceFields = document.getElementById('recurrence-fields');
+            if (taskType && recurrenceFields) {
+              if (taskType.value === 'automation') {
+                recurrenceFields.style.display = 'block';
+              } else {
+                recurrenceFields.style.display = 'none';
+              }
+            }
+          }
+          document.addEventListener('DOMContentLoaded', function() {
+            var taskType = document.getElementById('id_task_type');
+            if (taskType) {
+              taskType.addEventListener('change', toggleRecurrenceFields);
+              toggleRecurrenceFields();
+            }
+          });
+        </script>
         <form method="post" action="{% url 'delete_task' task.slug %}" style="margin-top: 1em;">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">Delete Task</button>

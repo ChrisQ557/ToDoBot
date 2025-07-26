@@ -18,7 +18,7 @@
                             <h2 class="card-title">{{ task.title }}</h2>
                             <p class="card-text">{{ task.description|striptags }}</p>
                             <hr />
-                            <p class="card-text text-muted h6">Due: {{ task.due_date|date:'M d, Y' }}</p>
+                            <p class="card-text text-muted h6">Due: {{ task.scheduled_time|date:'M d, Y' }}</p>
                             <p class="card-text">
                                 Status: {% if task.completed %}
                                     <span class="badge bg-success">Completed</span>

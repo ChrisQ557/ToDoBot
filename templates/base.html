@@ -23,6 +23,28 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+<style>
+        body {
+            background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(30, 34, 45, 0.5); /* dark overlay for readability */
+            z-index: 0;
+        }
+        main, nav, footer {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
 </head>
 <body class="d-flex flex-column h-100 main-bg">
     <!-- Navigation -->
@@ -51,8 +73,8 @@
                         </li>
                     {% endif %}
                 </ul>
-                <span class="navbar-text text-muted">
-                    Organize your tasks efficiently
+                <span class="navbar-text text-dark">
+                    ORGANIZE YOUR TASKS EFFECIENTLY
                 </span>
             </div>
         </div>

@@ -57,8 +57,14 @@ def task_detail(request, slug):
 
 @login_required
 def create_task(request):
+    from .forms import TaskForm
+    class TaskCreateForm(TaskForm):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            if 'is_completed' in self.fields:
+                self.fields.pop('is_completed')
     if request.method == 'POST':
-        form = TaskForm(request.POST)
+        form = TaskCreateForm(request.POST)
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
@@ -69,7 +75,7 @@ def create_task(request):
             from django.http import HttpResponseRedirect
             return HttpResponseRedirect(reverse('task_detail', args=[task.slug]))
     else:
-        form = TaskForm()
+        form = TaskCreateForm()
     return render(request, 'todo/task_form.html', {'form': form})
 
 @login_required

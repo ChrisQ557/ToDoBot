@@ -15,6 +15,12 @@ class TaskForm(forms.ModelForm):
             'recurrence_days',
         ]
         widgets = {
-            'scheduled_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-            'recurrence_time': forms.TimeInput(attrs={'type': 'time'}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'category': forms.Select(attrs={'class': 'form-select'}),
+            'scheduled_time': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
+            'is_completed': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'task_type': forms.Select(attrs={'class': 'form-select'}),
+            'recurrence_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
+            'recurrence_days': forms.TextInput(attrs={'class': 'form-control'}),
         }

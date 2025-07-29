@@ -23,26 +23,33 @@
 <div class="masthead-bg">
   <div class="container masthead-overlay">
     <div class="row g-0">
-      <div class="col-md-8 masthead-text">
+      <div class="col-md-8 masthead-text text-white">
+        <style>
+          .masthead-text .text-muted,
+          .masthead-text .badge {
+            color: #fff !important;
+          }
+          .masthead-text .bg-warning {
+            background-color: #ffc107 !important;
+            color: #212529 !important;
+          }
+          .masthead-text .bg-success {
+            background-color: #198754 !important;
+            color: #fff !important;
+          }
+        </style>
         <h1 class="post-title">{{ task.title }}</h1>
         <p class="post-subtitle">{{ task.user }} | {{ task.created_at|date:'M d, Y' }}</p>
         <h2>{{ coder }}</h2>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col card mb-4 mt-3 left top">
-      <div class="card-body">
-        <p class="card-text">
-          {{ task.description|safe|linebreaksbr }}
-        </p>
-        {% if task.scheduled_time %}
-        <p class="text-muted">Scheduled: {{ task.scheduled_time|date:'M d, Y H:i' }}</p>
-        {% endif %}
-        <p>Status: {% if task.is_completed %}<span class="badge bg-success">Completed</span>{% else %}<span class="badge bg-warning text-dark">Pending</span>{% endif %}</p>
+        <div class="card-body">
+          <p class="card-text text-white">
+            {{ task.description|safe|linebreaksbr }}
+          </p>
+          {% if task.scheduled_time %}
+          <p class="text-muted">Scheduled: {{ task.scheduled_time|date:'M d, Y H:i' }}</p>
+          {% endif %}
+          <p>Status: {% if task.is_completed %}<span class="badge bg-success">Completed</span>{% else %}<span class="badge bg-warning text-dark">Pending</span>{% endif %}</p>
+        </div>
       </div>
     </div>
   </div>

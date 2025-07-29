@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Task
+from .models import Task, Notification
 from .forms import TaskForm
 
 # Create your views here
@@ -41,6 +41,11 @@ def task_detail(request, slug):
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
+            # Create notification for update
+            Notification.objects.create(
+                user=request.user,
+                message=f"Task '{task.title}' was updated."
+            )
             from django.urls import reverse
             from django.http import HttpResponseRedirect
             return HttpResponseRedirect(reverse('task_detail', args=[task.slug]))
@@ -71,6 +76,11 @@ def create_task(request):
             from django.utils.text import slugify
             task.slug = slugify(task.title)
             task.save()
+            # Create notification for creation
+            Notification.objects.create(
+                user=request.user,
+                message=f"Task '{task.title}' was created."
+            )
             from django.urls import reverse
             from django.http import HttpResponseRedirect
             return HttpResponseRedirect(reverse('task_detail', args=[task.slug]))

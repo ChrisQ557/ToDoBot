@@ -1,73 +1,81 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h2 class="mb-4 text-center">Create Task</h2>
-  <form method="post" class="card p-4 shadow-sm bg-light">
-    {% csrf_token %}
-    {% if form.errors %}
-      <div class="alert alert-danger">
-        <ul class="mb-0">
-        {% for field in form %}
-          {% for error in field.errors %}
-            <li>{{ field.label }}: {{ error }}</li>
-          {% endfor %}
-        {% endfor %}
-        {% for error in form.non_field_errors %}
-          <li>{{ error }}</li>
-        {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
-    <div id="task-form-fields">
-      <div class="mb-3">
-        {{ form.title.label_tag }} {{ form.title }}
-      </div>
-      <div class="mb-3">
-        {{ form.description.label_tag }} {{ form.description }}
-      </div>
-      <div class="mb-3">
-        {{ form.category.label_tag }} {{ form.category }}
-      </div>
-      <div class="mb-3">
-        {{ form.scheduled_time.label_tag }} {{ form.scheduled_time }}
-      </div>
-      <div class="form-check mb-3">
-        {{ form.is_completed }} {{ form.is_completed.label_tag }}
-      </div>
-      <div class="mb-3">
-        {{ form.task_type.label_tag }} {{ form.task_type }}
-      </div>
-      <div id="recurrence-fields" class="mb-3">
-        <div class="mb-2">
-          {{ form.recurrence_time.label_tag }} {{ form.recurrence_time }}
-        </div>
-        <div>
-          {{ form.recurrence_days.label_tag }} {{ form.recurrence_days }}
-        </div>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-8 mx-auto card mb-4 mt-3">
+      <div class="card-body">
+        <h2 class="mb-4 text-center">{{ form_title|default:"Create Task" }}</h2>
+        <form method="post">
+          {% csrf_token %}
+          {% if form.errors %}
+            <div class="alert alert-danger">
+              <ul class="mb-0">
+              {% for field in form %}
+                {% for error in field.errors %}
+                  <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+              {% endfor %}
+              {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+          <div id="task-form-fields">
+            <div class="mb-3">
+              {{ form.title.label_tag }} {{ form.title }}
+            </div>
+            <div class="mb-3">
+              {{ form.description.label_tag }} {{ form.description }}
+            </div>
+            <div class="mb-3">
+              {{ form.category.label_tag }} {{ form.category }}
+            </div>
+            <div class="mb-3">
+              {{ form.scheduled_time.label_tag }} {{ form.scheduled_time }}
+            </div>
+            <div class="form-check mb-3">
+              {{ form.is_completed }} {{ form.is_completed.label_tag }}
+            </div>
+            <div class="mb-3">
+              {{ form.task_type.label_tag }} {{ form.task_type }}
+            </div>
+            <div id="recurrence-fields" class="mb-3">
+              <div class="mb-2">
+                {{ form.recurrence_time.label_tag }} {{ form.recurrence_time }}
+              </div>
+              <div>
+                {{ form.recurrence_days.label_tag }} {{ form.recurrence_days }}
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">{{ submit_label }}</button>
+        </form>
+        <a href="{% url 'home' %}" class="btn btn-link mt-3">Back to Task List</a>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-  </form>
-  <a href="{% url 'home' %}" class="btn btn-link mt-3">Back to Task List</a>
-  {% load static %}
-  <script src="{% static 'js/script.js' %}"></script>
-  <script>
-    window.toggleRecurrenceFields = function() {
-      var taskType = document.getElementById('id_task_type');
-      var recurrenceFields = document.getElementById('recurrence-fields');
-      if (taskType && recurrenceFields) {
-        if (taskType.value === 'automation') {
-          recurrenceFields.style.display = 'block';
-        } else {
-          recurrenceFields.style.display = 'none';
-        }
+  </div>
+</div>
+{% load static %}
+<script src="{% static 'js/script.js' %}"></script>
+<script>
+  window.toggleRecurrenceFields = function() {
+    var taskType = document.getElementById('id_task_type');
+    var recurrenceFields = document.getElementById('recurrence-fields');
+    if (taskType && recurrenceFields) {
+      if (taskType.value === 'automation') {
+        recurrenceFields.style.display = 'block';
+      } else {
+        recurrenceFields.style.display = 'none';
       }
     }
-    document.addEventListener('DOMContentLoaded', function() {
-      var taskType = document.getElementById('id_task_type');
-      if (taskType) {
-        taskType.addEventListener('change', window.toggleRecurrenceFields);
-        window.toggleRecurrenceFields();
-      }
-    });
-  </script>
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    var taskType = document.getElementById('id_task_type');
+    if (taskType) {
+      taskType.addEventListener('change', window.toggleRecurrenceFields);
+      window.toggleRecurrenceFields();
+    }
+  });
+</script>
 {% endblock %}

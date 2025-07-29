@@ -98,6 +98,15 @@ def delete_task(request, slug):
         return HttpResponseRedirect(reverse('home'))
     return render(request, 'todo/task_confirm_delete.html', {'task': task})
 
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+
+@login_required
+@require_POST
+def clear_notifications(request):
+    Notification.objects.filter(user=request.user).delete()
+    return JsonResponse({'status': 'success'})
+
     
    
 

@@ -24,15 +24,15 @@
                                 {% if task.task_type == 'automation' %}
                                     {% if task.last_completed_date == today %}
                                         <span class="badge bg-success">Completed for today</span>
-                                    {% else %}
+                                    {% elif task.is_pending_for_today %}
                                         <span class="badge bg-warning text-dark">Pending for today</span>
                                     {% endif %}
                                 {% else %}
                                     {% if task.is_completed %}
                                         <span class="badge bg-success">Completed</span>
-                                    {% elif task.scheduled_time and task.scheduled_time < now and not task.is_completed %}
+                                    {% elif task.is_overdue %}
                                         <span class="badge bg-danger">Overdue</span>
-                                    {% else %}
+                                    {% elif task.is_pending %}
                                         <span class="badge bg-warning text-dark">Pending</span>
                                     {% endif %}
                                 {% endif %}

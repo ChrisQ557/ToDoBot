@@ -29,6 +29,49 @@ class Task(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def is_overdue(self):
+        from django.utils import timezone
+        return (
+            self.scheduled_time is not None and
+            self.scheduled_time < timezone.now() and
+            not self.is_completed and
+            self.task_type != 'automation'
+        )
+
+    @property
+    def is_due_soon(self):
+        from django.utils import timezone
+        if self.scheduled_time is None or self.is_completed or self.task_type == 'automation':
+            return False
+        now = timezone.now()
+        soon = now + timezone.timedelta(hours=24)
+        return now <= self.scheduled_time <= soon
+
+    @property
+    def is_pending(self):
+        return not self.is_completed and not self.is_overdue and self.task_type != 'automation'
+
+    @property
+    def is_pending_for_today(self):
+        from django.utils import timezone
+        if self.task_type != 'automation':
+            return False
+        today = timezone.localdate()
+        # Check recurrence_days
+        if self.recurrence_days:
+            days = [d.strip().lower() for d in self.recurrence_days.split(',') if d.strip()]
+            weekday = today.strftime('%a').lower()[:3]  # e.g. 'mon', 'tue'
+            if weekday not in days:
+                return False
+        # Check recurrence_time (optional)
+        if self.recurrence_time:
+            now_time = timezone.localtime().time()
+            if now_time < self.recurrence_time:
+                return False
+        # Check if already completed today
+        return self.last_completed_date != today
+
 class Notification(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='notifications')
     message = models.CharField(max_length=255)

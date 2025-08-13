@@ -51,6 +51,8 @@ def task_detail(request, slug):
             return HttpResponseRedirect(reverse('task_detail', args=[task.slug]))
     else:
         form = TaskForm(instance=task)
+        if task.task_type == 'automation' and 'is_completed' in form.fields:
+            form.fields.pop('is_completed')
     return render(
         request,
         "todo/task_detail.html",

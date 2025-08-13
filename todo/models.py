@@ -64,13 +64,21 @@ class Task(models.Model):
             weekday = today.strftime('%a').lower()[:3]  # e.g. 'mon', 'tue'
             if weekday not in days:
                 return False
-        # Check recurrence_time (optional)
+        # Check recurrence_time 
         if self.recurrence_time:
             now_time = timezone.localtime().time()
             if now_time < self.recurrence_time:
                 return False
         # Check if already completed today
-        return self.last_completed_date != today
+        return not self.is_completed_for_today
+
+    @property
+    def is_completed_for_today(self):
+        from django.utils import timezone
+        if self.task_type != 'automation':
+            return False
+        today = timezone.localdate()
+        return self.last_completed_date == today
 
 class Notification(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='notifications')

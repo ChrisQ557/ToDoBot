@@ -1,4 +1,4 @@
-{% extends "todo/base.html" %}
+e{% extends "todo/base.html" %}
 
 {% block content %}
 <!-- index.html content starts here -->
@@ -22,10 +22,12 @@
                             <p class="card-text">
                                 Status:
                                 {% if task.task_type == 'automation' %}
-                                    {% if task.last_completed_date == today %}
+                                    {% if task.is_completed_for_today %}
                                         <span class="badge bg-success">Completed for today</span>
                                     {% elif task.is_pending_for_today %}
                                         <span class="badge bg-warning text-dark">Pending for today</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Not scheduled for today</span>
                                     {% endif %}
                                 {% else %}
                                     {% if task.is_completed %}

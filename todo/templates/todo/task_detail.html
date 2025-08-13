@@ -48,7 +48,25 @@
           {% if task.scheduled_time %}
           <p class="text-muted">Scheduled: {{ task.scheduled_time|date:'M d, Y H:i' }}</p>
           {% endif %}
-          <p>Status: {% if task.is_completed %}<span class="badge bg-success">Completed</span>{% else %}<span class="badge bg-warning text-dark">Pending</span>{% endif %}</p>
+          <p>Status: 
+            {% if task.task_type == 'automation' %}
+              {% if task.is_completed_for_today %}
+                <span class="badge bg-success">Completed for today</span>
+              {% elif task.is_pending_for_today %}
+                <span class="badge bg-warning text-dark">Pending for today</span>
+              {% else %}
+                <span class="badge bg-secondary">Not scheduled for today</span>
+              {% endif %}
+            {% else %}
+              {% if task.is_completed %}
+                <span class="badge bg-success">Completed</span>
+              {% elif task.is_overdue %}
+                <span class="badge bg-danger">Overdue</span>
+              {% elif task.is_pending %}
+                <span class="badge bg-warning text-dark">Pending</span>
+              {% endif %}
+            {% endif %}
+          </p>
         </div>
       </div>
     </div>

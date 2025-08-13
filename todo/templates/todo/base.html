@@ -46,7 +46,7 @@ main, nav, footer {
 </head>
 <body class="d-flex flex-column h-100 main-bg">
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}"><span class="brand">ToDo<span class="red-o">B</span>ot</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -107,7 +107,7 @@ main, nav, footer {
         </div>
     </div>
 {% endif %}
-<main class="flex-shrink-0 main-bg">
+<main class="flex-shrink-0 main-bg" style="padding-top: 56px;">
     {% if user.is_authenticated %}
         <p class="text-end m-3">You are logged in as {{ user }}</p>
     {% else %}

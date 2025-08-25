@@ -80,6 +80,11 @@ class Task(models.Model):
         today = timezone.localdate()
         return self.last_completed_date == today
 
+    @property
+    def is_recurring(self):
+        """True if task is automation and has recurrence_days set."""
+        return self.task_type == 'automation' and bool(self.recurrence_days and self.recurrence_days.strip())
+
 class Notification(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='notifications')
     message = models.CharField(max_length=255)

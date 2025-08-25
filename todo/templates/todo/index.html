@@ -26,6 +26,8 @@ e{% extends "todo/base.html" %}
                                         <span class="badge bg-success">Completed for today</span>
                                     {% elif task.is_pending_for_today %}
                                         <span class="badge bg-warning text-dark">Pending for today</span>
+                                    {% elif task.is_recurring %}
+                                        <span class="badge bg-info text-dark">Recurring</span>
                                     {% else %}
                                         <span class="badge bg-secondary">Not scheduled for today</span>
                                     {% endif %}

@@ -94,6 +94,11 @@ def create_task(request):
 def delete_task(request, slug):
     task = get_object_or_404(Task, slug=slug, user=request.user)
     if request.method == 'POST':
+        # Create notification for deletion
+        Notification.objects.create(
+            user=request.user,
+            message=f"Task '{task.title}' was deleted."
+        )
         task.delete()
         from django.urls import reverse
         from django.http import HttpResponseRedirect

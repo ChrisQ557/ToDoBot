@@ -8,7 +8,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         now = timezone.now()
+        self.stdout.write(f"Current time: {now}")
         soon = now + timezone.timedelta(hours=12)
+        self.stdout.write(f"Notification window ends at: {soon}")
         user_model = get_user_model()
         count = 0
 
@@ -19,12 +21,13 @@ class Command(BaseCommand):
             scheduled_time__gte=now,
             scheduled_time__lte=soon
         )
+        self.stdout.write(f"Found candidate tasks: {tasks.count()}")
 
         for task in tasks:
             # Check if notification already exists for this task & user within upcoming 12 hours
             recent = Notification.objects.filter(
                 user=task.user,
-                message__icontains=task.title,
+                message__startswith=f"Reminder: Task '{task.title}'",
                 created_at__gte=now - timezone.timedelta(hours=1)
             ).exists()
             if recent:

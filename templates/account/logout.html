@@ -17,8 +17,8 @@
       <form method="post" action="{{ action_url }}">
         {% csrf_token %}
         {{ redirect_field }}
-        <button class="btn btn-danger" type="submit">{% trans "Sign Out" %}</button>
-        <a class="btn btn-secondary ms-2" href="{% url 'home' %}">{% trans "Cancel" %}</a>
+        <button class="btn btn-danger mb-2" type="submit">{% trans "Sign Out" %}</button>
+        <a class="btn btn-secondary ms-2 mb-2" href="{% url 'home' %}">{% trans "Cancel" %}</a>
       </form>
     </div>
   </div>

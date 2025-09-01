@@ -1,2 +1,25 @@
-.venv
+.venv/
+.env
 env.py
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Django database
+db.sqlite3
+
+# Database dumps & credentials
+*.dump
+*.zip
+db_credentials.txt
+
+# Collected static files
+staticfiles/
+
+# IDE/editor directories
+.vscode/
+.idea/
+
+# macOS
+.DS_Store

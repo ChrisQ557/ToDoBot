@@ -38,29 +38,21 @@ All interactions happen seamlessly via Django templates ensuring a responsive an
 *   🔍 View detailed task pages
 *   🎨 Responsive design using Django templates
 *   📂 Custom management commands for automation
-*   🔒 Secure data handling with Django's ORM and SQLite
+*   🔒 Secure data handling with Django's ORM and PostgreSQL (configured via the DATABASE_URL environment variable)
 
 * * *
 
 **📁 Folder Structure**
 -----------------------
 
-    📁 ToDoBot/
-    ├── 📂 todo/                    # Main Django app
-    │   ├── 📂 migrations/          # Database migrations
-    │   ├── 📂 management/commands/ # Custom management commands
-    │   ├── 📂 templates/todo/      # HTML templates
-    │   ├── 📂 staticfiles/         # Static assets (CSS, JS)
-    │   ├── models.py              # Task model definition
-    │   ├── views.py               # View functions
-    │   └── urls.py                # App routes
-    ├── 📂 ToDoBot/                 # Project configuration
-    │   ├── settings.py            # Django settings
-    │   ├── urls.py                # Root URL configurations
-    │   └── wsgi.py                # WSGI entry point
-    ├── 📄 manage.py               # Django CLI
-    ├── 📄 requirements.txt        # Python dependencies
-    └── 📄 README.md               # Project README
+    📁 todo/                    # Main Django app
+    📁 ToDoBot/                 # Project configuration
+    📁 templates/               # Project-level templates
+    📁 staticfiles/             # Collected static files
+    📄 manage.py                # Django CLI
+    📄 requirements.txt         # Python dependencies
+    📄 README.md                # Project README
+    📄 .gitignore               # Git ignore rules
 
 * * *
 
@@ -117,7 +109,7 @@ Used for both creating and updating tasks:
 2. **Create and activate a virtual environment**
 
         python3 -m venv venv
-        source venv/bin/activate    # Windows: venv\\Scripts\\activate
+        source venv/bin/activate    # Windows: venv\Scripts\activate
 
 3. **Install dependencies**
 
@@ -135,6 +127,29 @@ Used for both creating and updating tasks:
 
    Visit `http://127.0.0.1:8000/` to start using ToDoBot.
 
+7. **Notify upcoming tasks**
+
+        python3 manage.py notify_upcoming_tasks
+
+   Triggers notifications for tasks due within the next 12 hours. Typically you'd schedule this with a task scheduler (e.g., Heroku Scheduler or cron), but to avoid extra dyno hours and charges on Heroku, run it manually when needed.
+
+
+
+**📦 Exporting Data for Assessment**
+-------------------------------
+
+To share your database contents without including the raw database file, you can export Django fixtures in JSON format:
+
+    # Export only the todo app's data
+    python3 manage.py dumpdata todo --indent 2 > todo_data.json
+
+    # Or export the entire database
+    python3 manage.py dumpdata --indent 2 > full_data.json
+
+Share the generated JSON file (`todo_data.json` or `full_data.json`) with your assessor for evaluation.
+
+* * *
+
 **🛠️ Environment & Admin**
 --------------------------
 
@@ -143,6 +158,13 @@ To create a Django superuser for accessing the admin interface:
 ```bash
 python3 manage.py createsuperuser
 ```
+
+* * *
+
+**🤝 Acknowledgments**
+---------------------
+
+* Photo assets sourced from Unsplash.
 
 * * *
 

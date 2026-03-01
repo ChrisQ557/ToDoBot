@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
-{% block content %}
-{% load crispy_forms_tags %}
 
+{% block extra_css %}
 <style>
 .masthead-bg {
     background-image: url('https://images.unsplash.com/photo-1598791318878-10e76d178023?fm=jpg&q=60&w=1200');
@@ -18,29 +17,30 @@
     width: 100%;
     padding: 2rem 0;
 }
+.masthead-text .text-muted,
+.masthead-text .badge {
+    color: #fff !important;
+}
+.masthead-text .bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+}
+.masthead-text .bg-success {
+    background-color: #198754 !important;
+    color: #fff !important;
+}
 </style>
+{% endblock %}
+
+{% block content %}
+{% load crispy_forms_tags %}
 
 <div class="masthead-bg">
   <div class="container masthead-overlay">
     <div class="row g-0">
       <div class="col-md-8 masthead-text text-white">
-        <style>
-          .masthead-text .text-muted,
-          .masthead-text .badge {
-            color: #fff !important;
-          }
-          .masthead-text .bg-warning {
-            background-color: #ffc107 !important;
-            color: #212529 !important;
-          }
-          .masthead-text .bg-success {
-            background-color: #198754 !important;
-            color: #fff !important;
-          }
-        </style>
         <h1 class="post-title">{{ task.title }}</h1>
         <p class="post-subtitle">{{ task.user }} | {{ task.created_at|date:'M d, Y' }}</p>
-        <h2>{{ coder }}</h2>
         <div class="card-body">
           <p class="card-text text-white">
             {{ task.description|safe|linebreaksbr }}
@@ -80,7 +80,7 @@
   <div class="row">
     <div class="col-12 col-md-8 mx-auto card mb-4 mt-3">
       <div class="card-body">
-        <h3>Update Task:</h3>
+        <h2>Update Task:</h2>
         <p>Editing as: {{ user.username }}</p>
         <form method="post" style="margin-top: 1.3em;">
             {% csrf_token %}

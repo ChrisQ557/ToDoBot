@@ -98,6 +98,7 @@ All interactions happen seamlessly via Django templates ensuring a responsive an
     📄 Procfile                 # Heroku deployment config
     📄 README.md                # Project README
     📄 TESTING.md               # Testing & validation documentation
+    📄 SCHEMA.sql               # Database schema (SQL)
     📄 .gitignore               # Git ignore rules
 
 * * *
@@ -211,6 +212,119 @@ Confirmation page before deleting a task:
         python3 manage.py run_automation_tasks
 
    Marks automation tasks as completed for today if their scheduled recurrence time matches the current time.
+
+* * *
+
+**🚀 Deployment**
+-----------------
+
+### Local Setup
+
+For local development, follow these steps:
+
+1. **Clone the repository and navigate to the project directory**
+
+        git clone https://github.com/ChrisQ557/ToDoBot.git
+        cd ToDoBot
+
+2. **Create and activate a virtual environment**
+
+        python3 -m venv venv
+        source venv/bin/activate
+
+3. **Install dependencies**
+
+        pip install -r requirements.txt
+
+4. **Configure environment variables**
+
+   Create a `.env` file in the project root with the following variables:
+
+        SECRET_KEY=your-secret-key-here
+        DEBUG=True
+        DATABASE_URL=sqlite:///db.sqlite3
+        ALLOWED_HOSTS=localhost,127.0.0.1
+
+5. **Apply database migrations**
+
+        python3 manage.py migrate
+
+6. **Create a superuser account (optional)**
+
+        python3 manage.py createsuperuser
+
+7. **Collect static files (optional for local development)**
+
+        python3 manage.py collectstatic --noinput
+
+8. **Run the development server**
+
+        python3 manage.py runserver
+
+   Access the application at `http://127.0.0.1:8000/`
+
+### Heroku Deployment
+
+ToDoBot has been deployed on Heroku using a PostgreSQL database. Follow these steps to deploy:
+
+1. **Install Heroku CLI**
+
+   Download and install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
+
+2. **Log in to Heroku**
+
+        heroku login
+
+3. **Create a new Heroku app**
+
+        heroku create your-app-name
+
+4. **Provision a PostgreSQL database**
+
+        heroku addons:create heroku-postgresql:hobby-dev
+
+   (Note: This project uses Neon PostgreSQL; for Neon, configure `DATABASE_URL` as an environment variable)
+
+5. **Set environment variables**
+
+        heroku config:set SECRET_KEY="your-secret-key"
+        heroku config:set DEBUG=False
+        heroku config:set ALLOWED_HOSTS="your-app-name.herokuapp.com"
+        heroku config:set DATABASE_URL="your-neon-database-url"
+
+6. **Ensure the Procfile is properly configured**
+
+   The `Procfile` should contain:
+
+        web: gunicorn ToDoBot.wsgi --log-file -
+
+7. **Push code to Heroku**
+
+        git push heroku main
+
+   (Replace `main` with your current branch name if different)
+
+8. **Run migrations on Heroku**
+
+        heroku run python manage.py migrate
+
+9. **Create a superuser on Heroku (optional)**
+
+        heroku run python manage.py createsuperuser
+
+10. **Collect static files**
+
+        heroku run python manage.py collectstatic --noinput
+
+11. **Open the app**
+
+        heroku open
+
+Your app is now live at `https://your-app-name.herokuapp.com/`.
+
+### Database Schema
+
+The complete database schema for this project is available in the [SCHEMA.sql](SCHEMA.sql) file, which contains all table definitions, relationships, and constraints used by ToDoBot.
 
 * * *
 

@@ -111,15 +111,17 @@ All interactions happen seamlessly via Django templates ensuring a responsive an
 **� Screenshots**
 ------------------
 
-> Drop your screenshot images into `docs/screenshots/` and replace the placeholder filenames below.
+![Screenshot 1](docs/screenshots/Screenshot%202026-03-04%20at%2020.47.45.png)
 
-![Screenshot 1](docs/screenshots/screenshot-1.png)
+![Screenshot 2](docs/screenshots/Screenshot%202026-03-04%20at%2020.49.27.png)
 
-![Screenshot 2](docs/screenshots/screenshot-2.png)
+![Screenshot 3](docs/screenshots/Screenshot%202026-03-04%20at%2020.50.47.png)
 
-![Screenshot 3](docs/screenshots/screenshot-3.png)
+![Screenshot 4](docs/screenshots/Screenshot%202026-03-04%20at%2020.51.04.png)
 
-![Screenshot 4](docs/screenshots/screenshot-4.png)
+![Screenshot 5](docs/screenshots/Screenshot%202026-03-04%20at%2020.51.08.png)
+
+![Screenshot 6](docs/screenshots/Screenshot%202026-03-04%20at%2020.51.17.png)
 
 * * *
 

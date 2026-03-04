@@ -15,15 +15,16 @@ Effortless task management powered by Django. ToDoBot lets you create, edit, tra
 3. [User Stories](#-user-stories)
 4. [Features](#-features)
 5. [Folder Structure](#-folder-structure)
-6. [Pages Breakdown](#-pages-breakdown)
-7. [Technologies Used](#-technologies-used)
-8. [How to Use](#-how-to-use)
-9. [Deployment](#-deployment)
-10. [Exporting Data for Assessment](#-exporting-data-for-assessment)
-11. [Environment & Admin](#️-environment--admin)
-12. [Testing & Validation](#-testing--validation)
-13. [Acknowledgments](#-acknowledgments)
-14. [Contact](#-contact)
+6. [Database Schema](#-database-schema)
+7. [Pages Breakdown](#-pages-breakdown)
+8. [Technologies Used](#-technologies-used)
+9. [How to Use](#-how-to-use)
+10. [Deployment](#-deployment)
+11. [Exporting Data for Assessment](#-exporting-data-for-assessment)
+12. [Environment & Admin](#️-environment--admin)
+13. [Testing & Validation](#-testing--validation)
+14. [Acknowledgments](#-acknowledgments)
+15. [Contact](#-contact)
 
 * * *
 
@@ -125,7 +126,121 @@ All interactions happen seamlessly via Django templates ensuring a responsive an
 
 * * *
 
-**🔍 Pages Breakdown**
+**�️ Database Schema**
+----------------------
+
+### Tables
+
+#### `todo_task`
+Core table for storing tasks. Each task belongs to a user and may belong to a category.
+
+| Column | Type | Constraints | Description |
+|--------|------|-------------|-------------|
+| id | BIGINT | PRIMARY KEY, AUTO-INCREMENT | Unique identifier |
+| user_id | INTEGER | FOREIGN KEY (auth_user.id) | User who owns the task |
+| category_id | BIGINT | FOREIGN KEY (todo_category.id), NULL | Task category |
+| title | VARCHAR(255) | UNIQUE, NOT NULL | Task title |
+| slug | VARCHAR(200) | UNIQUE, NULL | URL-friendly slug |
+| description | TEXT | NOT NULL | Task description/details |
+| task_type | VARCHAR(20) | NOT NULL, DEFAULT='user' | Type: 'user' or 'automation' |
+| scheduled_time | TIMESTAMP WITH TZ | NULL | When task is scheduled |
+| is_completed | BOOLEAN | NOT NULL, DEFAULT=FALSE | Completion status |
+| created_at | TIMESTAMP WITH TZ | NOT NULL, AUTO | Timestamp when created |
+| updated_at | TIMESTAMP WITH TZ | NOT NULL, AUTO | Timestamp when updated |
+| recurrence_time | TIME | NULL | Time of day for automation recurrence |
+| recurrence_days | VARCHAR(20) | NULL | Comma-separated days (mon,tue,wed) |
+| last_completed_date | DATE | NULL | Last completion date for automation tasks |
+
+#### `todo_category`
+Category table for organising tasks.
+
+| Column | Type | Constraints | Description |
+|--------|------|-------------|-------------|
+| id | BIGINT | PRIMARY KEY, AUTO-INCREMENT | Unique identifier |
+| name | VARCHAR(100) | UNIQUE, NOT NULL | Category name |
+
+#### `todo_notification`
+Notification table for user notifications.
+
+| Column | Type | Constraints | Description |
+|--------|------|-------------|-------------|
+| id | BIGINT | PRIMARY KEY, AUTO-INCREMENT | Unique identifier |
+| user_id | INTEGER | FOREIGN KEY (auth_user.id), NOT NULL | User receiving notification |
+| message | VARCHAR(255) | NOT NULL | Notification message |
+| is_read | BOOLEAN | NOT NULL, DEFAULT=FALSE | Read status |
+| created_at | TIMESTAMP WITH TZ | NOT NULL, AUTO | Timestamp when created |
+
+### Entity Relationship Diagram
+
+```
+┌─────────────────────┐
+│   auth_user         │
+│  (Django Auth)      │
+│─────────────────────│
+│ id (PK)             │
+│ username            │
+│ email               │
+│ password            │
+└──────────┬──────────┘
+           │
+           │ (1:N)
+           │
+    ┌──────┴──────────────────────┐
+    │                             │
+    │                    ┌────────▼──────────────┐
+    │                    │   todo_task           │
+    │                    │──────────────────────│
+    │                    │ id (PK)              │
+    │                    │ user_id (FK) ◄──────┤
+    │                    │ category_id (FK) ────┐
+    │                    │ title (UNIQUE)       │
+    │                    │ description          │
+    │                    │ slug (UNIQUE)        │
+    │                    │ task_type            │
+    │                    │ scheduled_time       │
+    │                    │ is_completed         │
+    │                    │ recurrence_time      │
+    │                    │ recurrence_days      │
+    │                    │ last_completed_date  │
+    │                    │ created_at           │
+    │                    │ updated_at           │
+    │                    └──────────────────────┘
+    │                             ▲
+    │                             │ (1:N)
+    │                             │
+    │                    ┌────────┴──────────────┐
+    │                    │   todo_category       │
+    │                    │──────────────────────│
+    │                    │ id (PK)              │
+    │                    │ name (UNIQUE)        │
+    │                    └──────────────────────┘
+    │
+    │ (1:N)
+    │
+    └──────────────────────────┐
+                               │
+                    ┌──────────▼──────────────┐
+                    │ todo_notification       │
+                    │──────────────────────│
+                    │ id (PK)              │
+                    │ user_id (FK) ◄──────┤
+                    │ message              │
+                    │ is_read              │
+                    │ created_at           │
+                    └──────────────────────┘
+```
+
+### Relationships
+
+1. **auth_user → todo_task** (One-to-Many) — a user can have many tasks; deleting a user cascades to their tasks.
+2. **todo_category → todo_task** (One-to-Many) — a category can have many tasks; deleting a category sets `category_id` to NULL.
+3. **auth_user → todo_notification** (One-to-Many) — a user can have many notifications; deleting a user cascades to their notifications.
+
+For the full SQL schema see [SCHEMA.sql](SCHEMA.sql).
+
+* * *
+
+**�🔍 Pages Breakdown**
 ----------------------
 
 ### `index.html` — Task List (Home)

@@ -3,6 +3,28 @@
 
 Effortless task management powered by Django. ToDoBot lets you create, edit, track, and complete tasks through a clean web interface.
 
+🔗 **Live Demo:** [https://todo-bot-db965e16a6fb.herokuapp.com/](https://todo-bot-db965e16a6fb.herokuapp.com/)
+
+* * *
+
+**📋 Table of Contents**
+------------------------
+
+1. [Overview](#-overview)
+2. [Intended Users](#-intended-users)
+3. [User Stories](#-user-stories)
+4. [Features](#-features)
+5. [Folder Structure](#-folder-structure)
+6. [Pages Breakdown](#-pages-breakdown)
+7. [Technologies Used](#-technologies-used)
+8. [How to Use](#-how-to-use)
+9. [Deployment](#-deployment)
+10. [Exporting Data for Assessment](#-exporting-data-for-assessment)
+11. [Environment & Admin](#️-environment--admin)
+12. [Testing & Validation](#-testing--validation)
+13. [Acknowledgments](#-acknowledgments)
+14. [Contact](#-contact)
+
 * * *
 
 **🌟 Overview**

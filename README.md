@@ -140,6 +140,9 @@ All interactions happen seamlessly via Django templates ensuring a responsive an
     📄 README.md                # Project README
     📄 TESTING.md               # Testing & validation documentation
     📄 SCHEMA.sql               # Database schema (SQL)
+    📄 DATABASE_SCHEMA.md       # Detailed database schema documentation
+    📄 DATABASE_ERD.md          # Entity-Relationship Diagram (Mermaid)
+    📄 DATA_DICTIONARY.md       # Database data dictionary
     📄 .gitignore               # Git ignore rules
 
 * * *
@@ -254,7 +257,7 @@ Notification table for user notifications.
 2. **todo_category → todo_task** (One-to-Many) — a category can have many tasks; deleting a category sets `category_id` to NULL.
 3. **auth_user → todo_notification** (One-to-Many) — a user can have many notifications; deleting a user cascades to their notifications.
 
-For the full SQL schema see [SCHEMA.sql](SCHEMA.sql).
+For the full SQL schema see [SCHEMA.sql](SCHEMA.sql). For detailed column-level documentation see [DATABASE_SCHEMA.md](DATABASE_SCHEMA.md) and [DATA_DICTIONARY.md](DATA_DICTIONARY.md). For an interactive Entity-Relationship Diagram see [DATABASE_ERD.md](DATABASE_ERD.md).
 
 * * *
 
@@ -479,7 +482,7 @@ Your app is now live at `https://your-app-name.herokuapp.com/`.
 
 ### Database Schema
 
-The complete database schema for this project is available in the [SCHEMA.sql](SCHEMA.sql) file, which contains all table definitions, relationships, and constraints used by ToDoBot.
+The complete database schema for this project is available in the [SCHEMA.sql](SCHEMA.sql) file, which contains all table definitions, relationships, and constraints used by ToDoBot. For further detail, see [DATABASE_SCHEMA.md](DATABASE_SCHEMA.md) for a structured schema reference, [DATABASE_ERD.md](DATABASE_ERD.md) for the Entity-Relationship Diagram, and [DATA_DICTIONARY.md](DATA_DICTIONARY.md) for the full data dictionary.
 
 * * *
 

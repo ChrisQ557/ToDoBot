@@ -14,17 +14,18 @@ Effortless task management powered by Django. ToDoBot lets you create, edit, tra
 2. [Intended Users](#-intended-users)
 3. [User Stories](#-user-stories)
 4. [Features](#-features)
-5. [Folder Structure](#-folder-structure)
-6. [Database Schema](#database-schema)
-7. [Pages Breakdown](#-pages-breakdown)
-8. [Technologies Used](#-technologies-used)
-9. [How to Use](#-how-to-use)
-10. [Deployment](#-deployment)
-11. [Exporting Data for Assessment](#-exporting-data-for-assessment)
-12. [Environment & Admin](#️-environment--admin)
-13. [Testing & Validation](#-testing--validation)
-14. [Acknowledgments](#-acknowledgments)
-15. [Contact](#-contact)
+5. [Screenshots](#-screenshots)
+6. [Folder Structure](#-folder-structure)
+7. [Database Schema](#database-schema)
+8. [Pages Breakdown](#-pages-breakdown)
+9. [Technologies Used](#-technologies-used)
+10. [How to Use](#-how-to-use)
+11. [Deployment](#-deployment)
+12. [Exporting Data for Assessment](#-exporting-data-for-assessment)
+13. [Environment & Admin](#️-environment--admin)
+14. [Testing & Validation](#-testing--validation)
+15. [Acknowledgments](#-acknowledgments)
+16. [Contact](#-contact)
 
 * * *
 
@@ -107,7 +108,22 @@ All interactions happen seamlessly via Django templates ensuring a responsive an
 
 * * *
 
-**📁 Folder Structure**
+**� Screenshots**
+------------------
+
+> Drop your screenshot images into `docs/screenshots/` and replace the placeholder filenames below.
+
+![Screenshot 1](docs/screenshots/screenshot-1.png)
+
+![Screenshot 2](docs/screenshots/screenshot-2.png)
+
+![Screenshot 3](docs/screenshots/screenshot-3.png)
+
+![Screenshot 4](docs/screenshots/screenshot-4.png)
+
+* * *
+
+**�📁 Folder Structure**
 -----------------------
 
     📁 todo/                    # Main Django app (models, views, forms, templates)

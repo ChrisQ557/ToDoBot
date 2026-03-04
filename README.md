@@ -15,7 +15,7 @@ Effortless task management powered by Django. ToDoBot lets you create, edit, tra
 3. [User Stories](#-user-stories)
 4. [Features](#-features)
 5. [Folder Structure](#-folder-structure)
-6. [Database Schema](#-database-schema)
+6. [Database Schema](#database-schema)
 7. [Pages Breakdown](#-pages-breakdown)
 8. [Technologies Used](#-technologies-used)
 9. [How to Use](#-how-to-use)
@@ -125,7 +125,7 @@ All interactions happen seamlessly via Django templates ensuring a responsive an
     📄 .gitignore               # Git ignore rules
 
 * * *
-
+<a id="database-schema"></a>
 **�️ Database Schema**
 ----------------------
 
